@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Connect Cloud</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Inter', sans-serif;
+}
+
+body{
+    background:#f4f7ff;
+    color:#1f2937;
+}
+
+nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 8%;
+    background:white;
+    box-shadow:0 4px 15px rgba(0,0,0,0.05);
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.logo-container{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo-img{
+    width:50px;
+    height:50px;
+    object-fit:contain;
+}
+
+.logo-text{
+    font-weight:700;
+    font-size:20px;
+    background: linear-gradient(90deg, #2f80ed, #8e44ad, #2f80ed, #8e44ad);
+    background-size: 200% 100%;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation: hologram 2s linear infinite;
+}
+
+@keyframes hologram {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 200% 0%; }
+}
+
+nav ul{
+    display:flex;
+    gap:25px;
+    list-style:none;
+}
+
+.hero{
+    text-align:center;
+    padding:120px 20px;
+    background:linear-gradient(135deg,#2f80ed,#8e44ad);
+    color:white;
+}
+
+.hero h1{
+    font-size:48px;
+    margin-bottom:20px;
+}
+
+.hero p{
+    font-size:18px;
+    max-width:700px;
+    margin:auto;
+    margin-bottom:30px;
+}
+
+.hero button{
+    padding:15px 30px;
+    border:none;
+    border-radius:12px;
+    font-weight:bold;
+    background:white;
+    color:#2f80ed;
+    cursor:pointer;
+}
+
+section{
+    padding:80px 8%;
+}
+
+.section-title{
+    text-align:center;
+    font-size:32px;
+    margin-bottom:50px;
+    color:#5b3cc4;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:30px;
+}
+
+.card{
+    background:white;
+    padding:30px;
+    border-radius:18px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+}
+
+footer{
+    background:#111827;
+    color:white;
+    text-align:center;
+    padding:40px;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <div class="logo-container">
+        <img src="logo.png" alt="Digital Connect Logo" class="logo-img">
+        <div class="logo-text">Digital Connect Cloud</div>
+    </div>
+    <ul>
+        <li>Inicio</li>
+        <li>Servicios</li>
+        <li>Planes</li>
+        <li>Nosotros</li>
+        <li>Contacto</li>
+    </ul>
+</nav>
+
+<section class="hero">
+    <h1>La nube inteligente para tu mundo digital</h1>
+    <p>Almacenamiento seguro, respaldo automático y soluciones empresariales escalables con tecnología de alto nivel.</p>
+    <button>Comenzar Gratis</button>
+</section>
+
+<section>
+    <h2 class="section-title">Nuestros Servicios</h2>
+    <div class="grid">
+        <div class="card">
+            <h3>Almacenamiento Seguro</h3>
+            <p>Guarda archivos con protección avanzada y acceso desde cualquier lugar.</p>
+        </div>
+        <div class="card">
+            <h3>Trabajo Colaborativo</h3>
+            <p>Comparte documentos y colabora en tiempo real.</p>
+        </div>
+        <div class="card">
+            <h3>Respaldo Automático</h3>
+            <p>Copias de seguridad inteligentes para evitar pérdida de datos.</p>
+        </div>
+        <div class="card">
+            <h3>Infraestructura Empresarial</h3>
+            <p>Servidores escalables adaptados al crecimiento de tu empresa.</p>
+        </div>
+    </div>
+</section>
+
+<!-- NUEVA SECCIÓN DE EQUIPO -->
+<section>
+    <h2 class="section-title">Equipo del Proyecto</h2>
+    <div class="grid">
+        <div class="card">
+             <h3>Edgar López Orozco</h3>
+            <p>Desarrollador principal y coordinador del proyecto.</p>
+        </div>
+
+        <div class="card">
+            <h3>Keyna Villa Vera</h3>
+            <p>Diseño de interfaz y experiencia de usuario.</p>
+        </div>
+
+<footer>
+    © 2026 Digital Connect Network | Todos los derechos reservados
+</footer>
+
+</body>
+</html>
