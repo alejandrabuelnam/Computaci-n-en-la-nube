@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alejandra Buelna — Cloud Computing</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0d0d0d;
+  --paper: #f5f0e8;
+  --accent: #c0392b;
+  --muted: #8a8178;
+  --line: #d4cfc6;
+}
+
+*, *::before, *::after {
+  margin: 0; padding: 0;
+  box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+}
+
+/* ── CURSOR ── */
+*, a, button { cursor: none !important; }
+#cursor {
+  position: fixed;
+  width: 10px; height: 10px;
+  background: var(--accent);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform .1s ease;
+}
+#cursor-ring {
+  position: fixed;
+  width: 34px; height: 34px;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: all .18s ease;
+  opacity: .5;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 6%;
+  z-index: 100;
+  mix-blend-mode: multiply;
+}
+
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: .02em;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 12px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color .2s;
+}
+.nav-links a:hover { color: var(--accent); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: end;
+  padding: 0 6% 80px;
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 42%;
+  height: 100%;
+  background: var(--ink);
+  z-index: 0;
+}
+
+.hero-text {
+  position: relative;
+  z-index: 1;
+  padding-bottom: 10px;
+}
+
+.hero-eyebrow {
+  font-size: 11px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(52px, 7vw, 96px);
+  line-height: .95;
+  font-weight: 900;
+  letter-spacing: -.02em;
+  margin-bottom: 36px;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.hero-desc {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.75;
+  max-width: 380px;
+  margin-bottom: 48px;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--accent);
+  color: white;
+  padding: 16px 32px;
+  font-size: 12px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  font-family: 'DM Sans', sans-serif;
+  transition: gap .3s ease, opacity .2s;
+}
+.btn-primary:hover { gap: 22px; opacity: .9; }
+.btn-primary span { font-size: 18px; }
+
+.hero-right {
+  position: relative;
+  z-index: 1;
+  padding: 0 0 10px 60px;
+}
+
+.hero-stat-block {
+  color: white;
+  margin-bottom: 48px;
+}
+
+.hero-stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 80px;
+  font-weight: 700;
+  line-height: 1;
+  color: white;
+}
+.hero-stat-num sup {
+  font-size: 32px;
+  vertical-align: top;
+  margin-top: 12px;
+  display: inline-block;
+  color: var(--accent);
+}
+
+.hero-stat-label {
+  font-size: 12px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.45);
+  margin-top: 8px;
+}
+
+.hero-divider {
+  width: 40px;
+  height: 1px;
+  background: rgba(255,255,255,.2);
+  margin: 32px 0;
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  z-index: 2;
+}
+.scroll-line {
+  width: 1px;
+  height: 60px;
+  background: var(--line);
+  animation: scrollPulse 2s ease infinite;
+}
+@keyframes scrollPulse {
+  0%,100% { transform: scaleY(1); opacity: 1; }
+  50% { transform: scaleY(.5); opacity: .4; }
+}
+
+/* ── SERVICES ── */
+#servicios {
+  padding: 120px 6%;
+  background: white;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 70px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 32px;
+}
+
+.section-label {
+  font-size: 11px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(32px, 4vw, 50px);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.section-count {
+  font-family: 'Playfair Display', serif;
+  font-size: 100px;
+  font-weight: 900;
+  color: var(--line);
+  line-height: 1;
+}
+
+.services-list {
+  display: grid;
+  gap: 0;
+}
+
+.service-item {
+  display: grid;
+  grid-template-columns: 60px 1fr auto;
+  align-items: center;
+  gap: 40px;
+  padding: 40px 0;
+  border-bottom: 1px solid var(--line);
+  transition: background .2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-item::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0;
+  height: 100%;
+  width: 0;
+  background: var(--paper);
+  transition: width .4s ease;
+  z-index: 0;
+}
+.service-item:hover::before { width: 100%; }
+.service-item > * { position: relative; z-index: 1; }
+
+.service-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.service-body h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.service-body p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.65;
+  max-width: 500px;
+}
+
+.service-tag {
+  font-size: 10px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 6px 14px;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(10px);
+  transition: all .3s ease;
+}
+.service-item:hover .service-tag {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ── ABOUT ── */
+#nosotros {
+  padding: 120px 6%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px;
+  align-items: center;
+}
+
+.about-visual {
+  position: relative;
+}
+
+.about-box-main {
+  background: var(--ink);
+  aspect-ratio: 4/5;
+  display: flex;
+  align-items: flex-end;
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-box-main::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 2px,
+    rgba(255,255,255,.015) 2px,
+    rgba(255,255,255,.015) 4px
+  );
+}
+
+.about-box-accent {
+  position: absolute;
+  bottom: -24px;
+  right: -24px;
+  width: 55%;
+  aspect-ratio: 1;
+  background: var(--accent);
+  z-index: -1;
+}
+
+.about-box-text {
+  position: relative;
+  z-index: 1;
+  color: white;
+}
+
+.about-box-text .big-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 72px;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--accent);
+}
+.about-box-text p {
+  font-size: 13px;
+  letter-spacing: .08em;
+  color: rgba(255,255,255,.5);
+  margin-top: 8px;
+  text-transform: uppercase;
+}
+
+.about-content .section-label { margin-bottom: 18px; }
+
+.about-content h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(30px, 3.5vw, 44px);
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 28px;
+}
+
+.about-content p {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+.about-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 36px;
+}
+
+.tag {
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 9px 18px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  color: var(--muted);
+  transition: all .2s;
+}
+.tag:hover {
+  background: var(--ink);
+  color: white;
+  border-color: var(--ink);
+}
+
+/* ── PLANS ── */
+#planes {
+  padding: 120px 6%;
+  background: var(--ink);
+  color: white;
+}
+
+#planes .section-label { color: var(--accent); }
+#planes .section-title { color: white; }
+#planes .section-count { color: rgba(255,255,255,.07); }
+#planes .section-header { border-bottom-color: rgba(255,255,255,.08); }
+
+.plans-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin-top: 60px;
+  background: rgba(255,255,255,.06);
+}
+
+.plan-card {
+  background: var(--ink);
+  padding: 50px 40px;
+  position: relative;
+  transition: background .3s;
+}
+
+.plan-card.featured {
+  background: var(--accent);
+}
+
+.plan-card:hover:not(.featured) {
+  background: rgba(255,255,255,.04);
+}
+
+.plan-badge {
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 30px;
+}
+.plan-card.featured .plan-badge { color: rgba(255,255,255,.7); }
+
+.plan-price {
+  font-family: 'Playfair Display', serif;
+  font-size: 64px;
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.plan-price sup {
+  font-size: 24px;
+  margin-top: 12px;
+}
+
+.plan-period {
+  font-size: 12px;
+  color: rgba(255,255,255,.4);
+  margin-bottom: 36px;
+}
+.plan-card.featured .plan-period { color: rgba(255,255,255,.65); }
+
+.plan-divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(255,255,255,.1);
+  margin-bottom: 36px;
+}
+.plan-card.featured .plan-divider { background: rgba(255,255,255,.25); }
+
+.plan-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 50px;
+}
+
+.plan-features li {
+  font-size: 14px;
+  color: rgba(255,255,255,.65);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.plan-card.featured .plan-features li { color: rgba(255,255,255,.9); }
+
+.plan-features li::before {
+  content: '—';
+  color: var(--accent);
+  font-size: 16px;
+}
+.plan-card.featured .plan-features li::before { color: rgba(255,255,255,.5); }
+
+.plan-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.btn-plan {
+  display: inline-block;
+  padding: 14px 28px;
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,.2);
+  color: white;
+  transition: all .25s;
+  font-family: 'DM Sans', sans-serif;
+}
+.btn-plan:hover {
+  background: white;
+  color: var(--ink);
+  border-color: white;
+}
+.plan-card.featured .btn-plan {
+  border-color: rgba(255,255,255,.5);
+}
+
+/* ── TEAM ── */
+#equipo {
+  padding: 120px 6%;
+  background: white;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2px;
+  margin-top: 60px;
+  background: var(--line);
+}
+
+.team-card {
+  background: white;
+  padding: 50px 40px;
+  position: relative;
+  overflow: hidden;
+  transition: background .3s;
+}
+.team-card:hover { background: var(--paper); }
+
+.team-role {
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 20px;
+}
+
+.team-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+
+.team-bio {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 30px;
+}
+
+.team-initial {
+  position: absolute;
+  bottom: -10px;
+  right: 20px;
+  font-family: 'Playfair Display', serif;
+  font-size: 140px;
+  font-weight: 900;
+  color: var(--line);
+  line-height: 1;
+  transition: color .3s;
+  pointer-events: none;
+}
+.team-card:hover .team-initial { color: var(--line); }
+
+/* ── CONTACT ── */
+#contacto {
+  padding: 120px 6%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.contact-left h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 28px;
+}
+
+.contact-left h2 em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.contact-left p {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.contact-info {
+  margin-top: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.contact-line {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--line);
+}
+
+.contact-line-label {
+  font-size: 10px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  width: 80px;
+  flex-shrink: 0;
+}
+
+.contact-line-val {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-field label {
+  font-size: 10px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.form-field input,
+.form-field textarea {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--line);
+  padding: 12px 0;
+  font-size: 15px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  color: var(--ink);
+  outline: none;
+  resize: none;
+  transition: border-color .2s;
+}
+.form-field input:focus,
+.form-field textarea:focus {
+  border-bottom-color: var(--accent);
+}
+.form-field textarea { min-height: 90px; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--ink);
+  color: rgba(255,255,255,.35);
+  padding: 40px 6%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  letter-spacing: .06em;
+}
+
+footer .footer-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: white;
+}
+
+/* ── REVEAL ANIMATION ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; padding-top: 120px; }
+  .hero::before { display: none; }
+  .hero-right { padding: 40px 0 0; }
+  .hero-stat-num, .hero-stat-block { color: var(--ink); }
+  #nosotros { grid-template-columns: 1fr; gap: 60px; }
+  #contacto { grid-template-columns: 1fr; }
+  .plans-grid { grid-template-columns: 1fr; }
+  .section-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .section-count { display: none; }
+}
+</style>
+</head>
+
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<nav>
+  <a class="nav-logo" href="#">AB — Cloud</a>
+  <ul class="nav-links">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#planes">Planes</a></li>
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text reveal">
+    <div class="hero-eyebrow">Computación en la Nube</div>
+    <h1>Tu negocio<br>en la <em>nube</em>,<br>sin límites.</h1>
+    <p class="hero-desc">Infraestructura inteligente, escalable y segura diseñada para empresas que no se detienen.</p>
+    <a href="#planes" class="btn-primary">Explorar planes <span>→</span></a>
+  </div>
+
+  <div class="hero-right reveal">
+    <div class="hero-stat-block">
+      <div class="hero-stat-num">99<sup>%</sup></div>
+      <div class="hero-stat-label">Disponibilidad garantizada</div>
+    </div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat-block">
+      <div class="hero-stat-num">256<sup>bit</sup></div>
+      <div class="hero-stat-label">Cifrado de extremo a extremo</div>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section id="servicios">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-label">Lo que ofrecemos</div>
+      <div class="section-title">Nuestros<br>Servicios</div>
+    </div>
+    <div class="section-count">04</div>
+  </div>
+
+  <div class="services-list">
+    <div class="service-item reveal">
+      <div class="service-num">01</div>
+      <div class="service-body">
+        <h3>Almacenamiento Seguro</h3>
+        <p>Guarda y accede a tus archivos desde cualquier dispositivo, con encriptación de nivel bancario y redundancia geográfica.</p>
+      </div>
+      <div class="service-tag">Storage</div>
+    </div>
+    <div class="service-item reveal">
+      <div class="service-num">02</div>
+      <div class="service-body">
+        <h3>Colaboración en Tiempo Real</h3>
+        <p>Edita, comenta y comparte documentos simultáneamente con tu equipo sin importar dónde se encuentren.</p>
+      </div>
+      <div class="service-tag">Teamwork</div>
+    </div>
+    <div class="service-item reveal">
+      <div class="service-num">03</div>
+      <div class="service-body">
+        <h3>Respaldos Automáticos</h3>
+        <p>Política de respaldo inteligente con versionado. Recupera cualquier archivo en el estado que estaba hace minutos o meses.</p>
+      </div>
+      <div class="service-tag">Backup</div>
+    </div>
+    <div class="service-item reveal">
+      <div class="service-num">04</div>
+      <div class="service-body">
+        <h3>Infraestructura Empresarial</h3>
+        <p>Servidores dedicados, redes privadas virtuales y soporte 24/7 para que tu operación nunca se detenga.</p>
+      </div>
+      <div class="service-tag">Enterprise</div>
+    </div>
+  </div>
+</section>
+
+<!-- NOSOTROS -->
+<section id="nosotros">
+  <div class="about-visual reveal">
+    <div class="about-box-main">
+      <div class="about-box-text">
+        <div class="big-num">2026</div>
+        <p>Fundado en Ensenada, B.C.</p>
+      </div>
+    </div>
+    <div class="about-box-accent"></div>
+  </div>
+
+  <div class="about-content reveal">
+    <div class="section-label">Nuestra historia</div>
+    <h2>Construido con propósito, escalado con precisión.</h2>
+    <p>Nacimos de la necesidad de ofrecer soluciones en la nube accesibles para empresas medianas en México. Creemos que la tecnología de punta no debe ser exclusiva de las grandes corporaciones.</p>
+    <p>Cada producto que construimos parte de un principio simple: debe ser confiable antes que sofisticado.</p>
+    <div class="about-tags">
+      <span class="tag">Docker</span>
+      <span class="tag">MySQL</span>
+      <span class="tag">Python</span>
+      <span class="tag">Streamlit</span>
+      <span class="tag">Linux</span>
+      <span class="tag">Automatización</span>
+    </div>
+  </div>
+</section>
+
+<!-- PLANES -->
+<section id="planes">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-label">Elige tu plan</div>
+      <div class="section-title">Precios<br>transparentes</div>
+    </div>
+    <div class="section-count">03</div>
+  </div>
+
+  <div class="plans-grid">
+    <div class="plan-card reveal">
+      <div class="plan-badge">Básico</div>
+      <div class="plan-name">Starter</div>
+      <div class="plan-price"><sup>$</sup>199</div>
+      <div class="plan-period">por mes / usuario</div>
+      <div class="plan-divider"></div>
+      <ul class="plan-features">
+        <li>100 GB de almacenamiento</li>
+        <li>Hasta 5 usuarios</li>
+        <li>Respaldo semanal</li>
+        <li>Soporte por correo</li>
+      </ul>
+      <a href="#contacto" class="btn-plan">Comenzar</a>
+    </div>
+
+    <div class="plan-card featured reveal">
+      <div class="plan-badge">Más popular</div>
+      <div class="plan-name">Business</div>
+      <div class="plan-price"><sup>$</sup>549</div>
+      <div class="plan-period">por mes / usuario</div>
+      <div class="plan-divider"></div>
+      <ul class="plan-features">
+        <li>1 TB de almacenamiento</li>
+        <li>Hasta 50 usuarios</li>
+        <li>Respaldo diario</li>
+        <li>Soporte 24/7</li>
+        <li>Panel de administración</li>
+      </ul>
+      <a href="#contacto" class="btn-plan">Comenzar</a>
+    </div>
+
+    <div class="plan-card reveal">
+      <div class="plan-badge">Corporativo</div>
+      <div class="plan-name">Enterprise</div>
+      <div class="plan-price"><sup>$</sup>—</div>
+      <div class="plan-period">cotización personalizada</div>
+      <div class="plan-divider"></div>
+      <ul class="plan-features">
+        <li>Almacenamiento ilimitado</li>
+        <li>Usuarios ilimitados</li>
+        <li>Respaldo en tiempo real</li>
+        <li>SLA garantizado</li>
+        <li>Infraestructura dedicada</li>
+      </ul>
+      <a href="#contacto" class="btn-plan">Contactar</a>
+    </div>
+  </div>
+</section>
+
+<!-- EQUIPO -->
+<section id="equipo">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-label">Las personas detrás</div>
+      <div class="section-title">Equipo</div>
+    </div>
+    <div class="section-count">01</div>
+  </div>
+
+  <div class="team-grid">
+    <div class="team-card reveal">
+      <div class="team-role">Desarrolladora & Analista</div>
+      <div class="team-name">Alejandra<br>Buelna Méndez</div>
+      <div class="team-bio">Especialista en computación en la nube, bases de datos y automatización de infraestructura. UABC — 2026.</div>
+      <div class="team-initial">A</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="contact-left reveal">
+    <div class="section-label">Hablemos</div>
+    <h2>¿Listo para<br><em>empezar</em>?</h2>
+    <p>Cuéntanos sobre tu proyecto y te ayudamos a encontrar la solución ideal para tu negocio.</p>
+    <div class="contact-info">
+      <div class="contact-line">
+        <span class="contact-line-label">Email</span>
+        <span class="contact-line-val">hola@abcloud.mx</span>
+      </div>
+      <div class="contact-line">
+        <span class="contact-line-label">Ubicación</span>
+        <span class="contact-line-val">Ensenada, Baja California</span>
+      </div>
+      <div class="contact-line">
+        <span class="contact-line-label">Horario</span>
+        <span class="contact-line-val">Lun–Vie, 9am – 7pm</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="contact-form reveal">
+    <div class="form-field">
+      <label>Nombre completo</label>
+      <input type="text" placeholder="Tu nombre">
+    </div>
+    <div class="form-field">
+      <label>Correo electrónico</label>
+      <input type="email" placeholder="correo@empresa.com">
+    </div>
+    <div class="form-field">
+      <label>Empresa</label>
+      <input type="text" placeholder="Nombre de tu empresa">
+    </div>
+    <div class="form-field">
+      <label>Mensaje</label>
+      <textarea placeholder="Cuéntanos sobre tu proyecto..."></textarea>
+    </div>
+    <button class="btn-primary" style="border:none;">Enviar mensaje <span>→</span></button>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-logo">AB — Cloud</span>
+  <span>© 2026 Alejandra Buelna Méndez · Computación en la Nube (361) · UABC</span>
+  <span>Ensenada, B.C.</span>
+</footer>
+
+<script>
+// Custom cursor
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
+  setTimeout(() => {
+    ring.style.left = e.clientX + 'px';
+    ring.style.top = e.clientY + 'px';
+  }, 60);
+});
+
+// Reveal on scroll
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+    }
+  });
+}, { threshold: 0.1 });
+reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
